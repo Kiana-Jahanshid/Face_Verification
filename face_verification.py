@@ -36,9 +36,9 @@ def faceanalysis(opt) :
     # و دیگه نیاز به اسکیلینگ نیست
     print("\neuclidean distance value = " , euclidean_distance)
     # same persons have least euclidean distance between their feature vectors 
-    if euclidean_distance < 25 :
+    if euclidean_distance < 26 :
         print(" Same Person ")
-    elif euclidean_distance > 29 :
+    elif euclidean_distance > 26 :
         print(" Different Persons ")
 
 
