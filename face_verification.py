@@ -35,12 +35,11 @@ def faceanalysis(opt) :
     # اگر فرض بر این باشد که ابعاد همیشه فیچر وکتور ۵۱۲ بعدی است دیگه نیازی نیست تقسیم بر ۵۱۲ بکنیم سام را
     # و دیگه نیاز به اسکیلینگ نیست
     print("\neuclidean distance value = " , euclidean_distance)
-    # same persons have least euclidean distance between their feature vectors 
+    # same persons have less euclidean distance between their feature vectors 
     if euclidean_distance < 26 :
         print(" Same Person ")
     elif euclidean_distance > 26 :
         print(" Different Persons ")
-
 
 
 if __name__ == "__main__" :
