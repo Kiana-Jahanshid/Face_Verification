@@ -4,6 +4,7 @@ import argparse
 import numpy as np 
 import matplotlib.pyplot as plt 
 from insightface.app import FaceAnalysis
+from create_facebank import CreateFaceBank
 
 class FaceIdentification :
     def __init__(self):
@@ -56,30 +57,8 @@ class FaceIdentification :
         plt.show()
 
 
-    def update_facebank(self , args):
-        facebank_path = args.update
-        face_bank_embeddings = []
-        for person_folder_name in os.listdir(facebank_path):
-            folder_path = os.path.join(facebank_path , person_folder_name)
-            print(folder_path)
-            if os.path.isdir(folder_path): 
-                for image_name in os.listdir(folder_path):
-                    image_path = os.path.join(folder_path , image_name)
-                    print(image_path)
-                    image = cv2.imread(image_path)
-                    #image = cv2.cvtColor(image , cv2.COLOR_BGR2RGB)
-                    result = app.get(image)  
-                    if len(result) > 1 : 
-                        print("warning :  more than one face detected in image ")
-                        continue 
-                    embedding = result[0]["embedding"]    
-                    my_dict = {"name": person_folder_name , "embedding":embedding}
-                    face_bank_embeddings.append(my_dict)
-
-        #print(face_bank_embeddings)
-        np.save("face_bank.npy" , face_bank_embeddings)
-
-
+    def update_facebank(self ,app , args):
+        CreateFaceBank.facebank(self , app=app ,folder_path=args.update)
 
 
 if __name__ == "__main__":
@@ -89,7 +68,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     obj = FaceIdentification()
     app = obj.load_model()
-    obj.update_facebank(args)
+    obj.update_facebank(app , args)
     image = obj.load_image(args)
     results , face_bank = obj.load_facebank(input_image=image , app=app)
     obj.identification(input_image=image , results=results , face_bank=face_bank)
