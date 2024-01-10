@@ -81,8 +81,8 @@ class Game(arcade.Window):
         if self.accept_playing == False :
             self.flag = 1
             self.clear()
-            arcade.draw_text("You dont have permission ",20,330,arcade.color.RED , 30 , bold=True)
-            arcade.draw_text("\t\t\t\t\t   to play this game",20,240,arcade.color.RED , 30 , bold=True)
+            arcade.draw_text("You dont have permission ",20,340,arcade.color.RED_DEVIL , 30 , bold=True)
+            arcade.draw_text("to play this game",115,270,arcade.color.RED_DEVIL , 30 , bold=True)
 
 
     def on_key_press(self , symbol : int , modifiers : int):
@@ -95,7 +95,6 @@ class Game(arcade.Window):
         if self.ground.width//2 -5< x < self.width - self.ground.width//2 -5 :
             self.ground.center_x = x
  
-
 
     def on_update(self, delta_time: float):
         self.frog.move()

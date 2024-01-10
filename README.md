@@ -52,6 +52,13 @@ python face_verification.py --image_1 "./me1.jpg" --image_2 "./me2.jpg"
 ````
 python face_identification.py --image "./group_1.JPG" --update "./face_bank/"
 ````
+
++ ### part 3 : (FaceID : use password to start programs )
+related files are in the FaceID folder . in this part , i have used arkanoid game for implementing game's entrance password .
+```
+python arkanoid.py
+```
+
 # Results :
 
 ![output](assets/result_part2.JPG)
