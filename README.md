@@ -2,8 +2,8 @@
 
 in this project we have used [`insightface`](https://github.com/deepinsight/insightface) package for face analysis task .
 
-+ it's Detection Model :  SCRFD 
-+ it's Recognition Model  :  ResNet
++ it's Detection Model is :  SCRFD 
++ it's Recognition Model is :  ResNet
 <br/>
 
 ###  Reasons for using insightface :
@@ -43,11 +43,15 @@ pip install -r requirements.txt
 
 
 # How to run 
-
++ ### part 1 : (determine same person or not)
 ```
 python face_verification.py --image_1 "./me1.jpg" --image_2 "./me2.jpg"
 ```
++ ### part 2 : (identify persons in image)
 
+````
+python face_identification.py --image "./group_1.JPG" --update "./face_bank/"
+````
 # Results :
 
 ![output](assets/result_part2.JPG)
