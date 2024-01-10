@@ -47,7 +47,7 @@ pip install -r requirements.txt
 ```
 python face_verification.py --image_1 "./me1.jpg" --image_2 "./me2.jpg"
 ```
-+ ### part 2 : (identify persons in image)
++ ### part 2 : (identify persons in an image)
 
 ````
 python face_identification.py --image "./group_1.JPG" --update "./face_bank/"
