@@ -8,7 +8,7 @@ from insightface.data import get_image as ins_get_image
 
 
 def faceanalysis(opt) :
-
+    # FaceAnalysis class has two network (detection + recognition)
     app = FaceAnalysis(name="buffalo_s" , providers=['CUDAExecutionProvider' ,'CPUExecutionProvider'])
     app.prepare(ctx_id=0, det_size=(640, 640))
     # used SCRFD algorithm instead of YOLO
