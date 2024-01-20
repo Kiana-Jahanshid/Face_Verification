@@ -18,7 +18,7 @@ class CreateFaceBank:
         face_bank_embeddings = []
         for person_folder_name in os.listdir(facebank_path):
             folder_path = os.path.join(facebank_path , person_folder_name)
-            print(folder_path)
+            #print(folder_path)
             if os.path.isdir(folder_path): # if it was a folder 
                 for image_name in os.listdir(folder_path):
                     image_path = os.path.join(folder_path , image_name)# complete path
@@ -33,5 +33,5 @@ class CreateFaceBank:
                     my_dict = {"name": person_folder_name , "embedding":embedding}
                     face_bank_embeddings.append(my_dict)
 
-        print(face_bank_embeddings)
+        #print(face_bank_embeddings)
         np.save("face_bank.npy" , face_bank_embeddings)

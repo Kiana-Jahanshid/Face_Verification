@@ -29,29 +29,27 @@ class FaceIdentification :
     
 
     def identification(self ,input_image , results , face_bank):
-        result_image = input_image.copy()
-        for result in results :
+        for result in results:
             for person in face_bank:
                 facebank_person_embedding = person["embedding"]
-                print(facebank_person_embedding)
                 new_person_embedding = result["embedding"]
-                print(new_person_embedding)
-                distance = np.sqrt(np.sum((facebank_person_embedding - new_person_embedding)**2))
-                print("distance value : " , distance)
-                if distance < 26 :
-                    cv2.rectangle(result_image , (int(result.bbox[0])-10 , int(result.bbox[1])-20 , int(result.bbox[2])-140 , int(result.bbox[3])-25) , (0 , 255 , 255) , 2)
-                    cv2.putText(result_image , person["name"] , (int(result.bbox[0]) + 10 , int(result.bbox[1]) -30 ) , 
-                    cv2.FONT_HERSHEY_SIMPLEX , 0.8  , (0 , 255, 255) ,  2 , cv2.LINE_AA )
-                    print( person["name"])
-                    print("true")
-                    return True
-                else :
-                    return False
-                break
-            else :
-                print("False")
-                return False
-                
+
+                distance = np.sqrt(np.sum((facebank_person_embedding - new_person_embedding) **2))
+                print(distance)
+                if distance < 29:
+                    cv2.rectangle(input_image,(int(result.bbox[0]),int(result.bbox[1])),(int(result.bbox[2]),int(result.bbox[3])),(0,255,0),2)
+                    cv2.putText(input_image,person["name"],(int(result.bbox[0]) , int(result.bbox[1])-10),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,255),2,cv2.LINE_AA)
+                    accept_playing = True
+                    temp = False
+                    return  accept_playing ,  temp
+                    break
+            else:
+                cv2.rectangle(input_image,(int(result.bbox[0]),int(result.bbox[1])),(int(result.bbox[2]),int(result.bbox[3])),(0,255,0),2)
+                cv2.putText(input_image,"Unknown",(int(result.bbox[0]) , int(result.bbox[1])-10),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,255),2,cv2.LINE_AA)
+                accept_playing = False
+                temp = False
+                return accept_playing , temp
+            
     def update_facebank(self ,app , folderpath):
         CreateFaceBank.facebank(self , app=app ,folder_path=folderpath)
 

@@ -1,12 +1,14 @@
 import cv2
 import arcade 
 import random 
+import numpy as np
 from frog import Frog 
 from objects import Bug , Bee , Worm , Fish 
 from ground import Ground
 from face_identification import FaceIdentification
 from create_facebank import CreateFaceBank
-
+from insightface.app import FaceAnalysis
+from insightface.data import get_image as ins_get_image
 
 class Heart(arcade.Sprite):
     def __init__(self ):
@@ -146,24 +148,25 @@ class Game(arcade.Window):
 
 
 
+if __name__ == "__main__" :
+    
+    obj = FaceIdentification()
+    app = obj.load_model()
+    face_bank = np.load("face_bank.npy",allow_pickle=True)
+    cam = cv2.VideoCapture(0)  
+    temp =  True
 
-cam = cv2.VideoCapture(0)  
-boolean , img = cam.read()
-if boolean :   
-    cv2.namedWindow("cam")
-    cv2.imshow("cam",img)
-    cv2.waitKey(0)
-    cv2.destroyWindow("cam")
-    cv2.imwrite("person.jpg",img) 
+    while temp:
+        _, input_image = cam.read()
 
+        results , face_bank = obj.load_facebank(input_image , app)
+        accept_playing , temp = obj.identification(input_image , results , face_bank)
 
-obj = FaceIdentification()
-app = obj.load_model()
-obj.update_facebank(app=app , folderpath="./face_bank/")
-image = obj.load_image(image_path="./person.jpg")
-result , facebank = obj.load_facebank(input_image=image , app=app)
-print(" result: " , result)
-accept_playing = obj.identification(input_image=image , results=result , face_bank=facebank)
-print("accept_playing :",accept_playing)
-window = Game(accept_playing)
-arcade.run()        
+        cv2.imshow("Frame", input_image)
+        if cv2.waitKey(1):
+            break   
+    cam.release()
+    cv2.destroyAllWindows()
+
+    window = Game(accept_playing)
+    arcade.run()        
