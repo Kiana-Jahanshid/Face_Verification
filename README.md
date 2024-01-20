@@ -61,4 +61,4 @@ python arkanoid.py
 
 # Results :
 
-![output](assets/result_part2.JPG)
+![output](assets/part2_results/result_part2.JPG)
